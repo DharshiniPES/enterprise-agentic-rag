@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: agentic-rag-api
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_PROVIDER=offline
+      - DENSE_TOP_K=12
+      - SPARSE_BM25_TOP_K=12
+      - RERANKER_TOP_K=4
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  ui:
+    build: .
+    container_name: agentic-rag-ui
+    ports:
+      - "8501:8501"
+    command: ["streamlit", "run", "ui/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    environment:
+      - LLM_PROVIDER=offline
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - api
+    restart: unless-stopped

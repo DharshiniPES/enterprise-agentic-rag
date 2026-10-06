@@ -1,0 +1,58 @@
+[
+  {
+    "id": "q1",
+    "question": "What was Apple's total quarterly revenue in Q3 FY2024 and what was the year-over-year percentage increase?",
+    "ground_truth": "Apple's quarterly revenue was $85.78 billion ($85,777 million), which represents an increase of 4.87% year-over-year compared to $81.80 billion in Q3 FY2023.",
+    "expected_keywords": ["85.78 billion", "85,777", "4.87%", "81.80 billion"],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q2",
+    "question": "How much revenue did Apple Services generate, and what was the gross margin for the Services segment?",
+    "ground_truth": "Apple Services generated an all-time record revenue of $24.213 billion (up 14.14% YoY) with a Services gross margin of 74.0%.",
+    "expected_keywords": ["24,213", "24.213", "74.0%", "14.14%"],
+    "category": "segment_margin"
+  },
+  {
+    "id": "q3",
+    "question": "Why did iPad revenue surge by 23.67% in Q3 FY24 according to the financial report?",
+    "ground_truth": "iPad revenue surged by 23.67% YoY to $7,162 million driven by the launch of the redesigned iPad Pro with M4 and the 13-inch iPad Air.",
+    "expected_keywords": ["23.67%", "iPad Pro", "M4", "iPad Air", "7,162"],
+    "category": "causal_reasoning"
+  },
+  {
+    "id": "q4",
+    "question": "How much did Tesla recognize in automotive regulatory credits in Q2 2024, and what was the percentage increase compared to Q2 2023?",
+    "ground_truth": "Tesla recognized $890 million in automotive regulatory credits in Q2 2024, representing a 215.6% increase compared to $282 million in Q2 2023.",
+    "expected_keywords": ["890 million", "215.6%", "282 million"],
+    "category": "keyword_lookup"
+  },
+  {
+    "id": "q5",
+    "question": "What was the growth in Tesla's energy storage deployment in GWh and the annualized production run rate at the Lathrop Megafactory?",
+    "ground_truth": "Tesla deployed 9.40 GWh of energy storage (up 157.5% YoY from 3.65 GWh), and the Lathrop Megafactory achieved an annualized production run rate of 40 GWh per year.",
+    "expected_keywords": ["9.40 GWh", "157.5%", "40 GWh", "Lathrop"],
+    "category": "table_lookup"
+  },
+  {
+    "id": "q6",
+    "question": "How many Nvidia H100 GPUs or equivalent compute capacity did Tesla operate in the Cortex cluster at the Texas Gigafactory?",
+    "ground_truth": "Tesla brought online an additional 15,000 Nvidia H100 GPUs at the Texas Gigafactory Cortex cluster, reaching a total fleet compute equivalent of 35,000 H100 GPU equivalents.",
+    "expected_keywords": ["15,000", "Cortex", "35,000", "H100"],
+    "category": "technical_ai"
+  },
+  {
+    "id": "q7",
+    "question": "What percentage of Apple's CapEx was dedicated to Private Cloud Compute server nodes for Apple Intelligence, and what hardware powers them?",
+    "ground_truth": "Approximately 35% of Apple's $2.15 billion CapEx was designated for Private Cloud Compute server nodes, which are powered by custom Apple Silicon (M2 Ultra clusters).",
+    "expected_keywords": ["35%", "Private Cloud Compute", "M2 Ultra", "2.15 billion"],
+    "category": "footnote_analysis"
+  },
+  {
+    "id": "q8",
+    "question": "Compare Apple's Services revenue with Tesla's Energy Generation & Storage revenue for their respective quarters.",
+    "ground_truth": "Apple's Services revenue was $24.213 billion in Q3 FY24, which is approximately 8 times larger than Tesla's Energy Generation & Storage revenue of $3.014 billion in Q2 2024.",
+    "expected_keywords": ["24,213", "3,014", "Services", "Energy"],
+    "category": "cross_document_comparison"
+  }
+]
