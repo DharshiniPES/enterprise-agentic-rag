@@ -88,7 +88,7 @@ Evaluated against an 8-task ground-truth benchmark suite of complex corporate di
 ### 1. Installation
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/your-username/enterprise-agentic-rag.git
+git clone https://github.com/DharshiniPES/enterprise-agentic-rag.git
 cd enterprise-agentic-rag
 pip install -r requirements.txt
 ```
