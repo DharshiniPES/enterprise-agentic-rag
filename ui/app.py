@@ -19,7 +19,6 @@ from src.evaluation.ragas_bench import RagasBenchmarkSuite
 # Streamlit Page Config
 st.set_page_config(
     page_title="Enterprise Agentic RAG Platform",
-    page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -96,12 +95,11 @@ search_engine, workflow, benchmark_suite, all_chunks, docs_summary = load_system
 
 # Sidebar
 with st.sidebar:
-    st.image("https://img.icons8.com/fluency/96/artificial-intelligence.png", width=64)
     st.title("Enterprise AI Engine")
     st.caption("Self-Corrective Multi-Index RAG System")
 
     st.markdown("---")
-    st.subheader("⚙️ System Telemetry")
+    st.subheader("System Telemetry")
     st.markdown(f"**Knowledge Chunks:** `{len(all_chunks)}`")
     st.markdown(f"**Indexed Filings:** `{len(docs_summary)}`")
     st.markdown(f"**Dense Top-K:** `{config.dense_top_k}`")
@@ -110,7 +108,7 @@ with st.sidebar:
     st.markdown(f"**Relevance Gate:** `{int(config.relevance_threshold*100)}%`")
 
     st.markdown("---")
-    st.subheader("🛡️ Safety & Guardrails")
+    st.subheader("Safety & Guardrails")
     st.checkbox("Hallucination Critic (NLI)", value=True, disabled=True)
     st.checkbox("Reciprocal Rank Fusion", value=True, disabled=True)
     st.checkbox("Cross-Encoder Reranking", value=True, disabled=True)
@@ -118,7 +116,7 @@ with st.sidebar:
 # Main UI Header
 col1, col2 = st.columns([3, 1])
 with col1:
-    st.title("🧠 Enterprise Agentic RAG Platform")
+    st.title("Enterprise Agentic RAG Platform")
     st.markdown(
         "Production-grade **Self-RAG & Corrective RAG (CRAG)** engine powered by **Hybrid Retrieval (Dense + BM25)**, "
         "**Cross-Encoder Reranking**, and automated **Ragas Evaluation**."
@@ -126,17 +124,17 @@ with col1:
 with col2:
     st.markdown("""
     <div style="text-align: right; margin-top: 10px;">
-        <span class="node-badge-success">● SYSTEM ONLINE</span><br>
+        <span class="node-badge-success">[ONLINE] SYSTEM READY</span><br>
         <span style="font-size: 0.8rem; color: #94a3b8;">p95 Latency: &lt;450ms</span>
     </div>
     """, unsafe_allow_html=True)
 
 # Tabs
-tab_query, tab_bench, tab_kb = st.tabs(["⚡ Intelligence Query Playground", "📊 Ragas Benchmark Scorecard", "📚 Knowledge Corpus"])
+tab_query, tab_bench, tab_kb = st.tabs(["Intelligence Query Playground", "Ragas Benchmark Scorecard", "Knowledge Corpus"])
 
 # Tab 1: Query Playground
 with tab_query:
-    st.markdown("### 💬 Ask Enterprise Questions")
+    st.markdown("### Ask Enterprise Questions")
     
     preset_questions = [
         "What was Apple's total quarterly revenue in Q3 FY2024 and what was the year-over-year percentage increase?",
@@ -156,7 +154,7 @@ with tab_query:
     else:
         user_query = selected_preset
 
-    run_btn = st.button("🚀 Execute Agentic Workflow", type="primary")
+    run_btn = st.button("Execute Agentic Workflow", type="primary")
 
     if run_btn and user_query:
         with st.spinner("Executing Agent State Graph..."):
@@ -171,7 +169,7 @@ with tab_query:
         with m_col2:
             st.metric("Retrieval Relevance", f"{round(state['relevance_score']*100, 1)}%", delta="Above Gate")
         with m_col3:
-            st.metric("Faithfulness (NLI)", f"{round(state['hallucination_score']*100, 1)}%", delta="0 Hallucinations")
+            st.metric("Faithfulness (NLI)", f"{round(state['hallucination_score']*100, 1)}%", delta="Verified Grounded")
         with m_col4:
             st.metric("Query Rewrites", f"{state['iterations']} iterations")
 
@@ -181,7 +179,7 @@ with tab_query:
         left_col, right_col = st.columns([1.1, 1.9])
 
         with left_col:
-            st.subheader("🔍 Agent Execution Trace")
+            st.subheader("Agent Execution Trace")
             for idx, event in enumerate(state["execution_trace"], start=1):
                 node = event["node_name"]
                 status = event["status"]
@@ -192,17 +190,17 @@ with tab_query:
                     badge = "node-badge-warning"
 
                 with st.expander(f"Step {idx}: {node.replace('_', ' ').title()}", expanded=(idx in [1, 2, 4])):
-                    st.markdown(f"<span class='{badge}'>{status.upper()}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='{badge}'>[{status.upper()}]</span>", unsafe_allow_html=True)
                     st.write(msg)
                     st.json(event["details"])
 
         with right_col:
-            st.subheader("📝 Grounded Synthesized Intelligence")
+            st.subheader("Grounded Synthesized Intelligence")
             st.markdown(state["generation"])
 
-            st.markdown("#### 📑 Verified Source Context & Citations")
+            st.markdown("#### Verified Source Context & Citations")
             for cit in state["citations"]:
-                with st.expander(f"📌 {cit['citation_tag']} &bull; {cit['source']} &mdash; {cit['section']} (Confidence: {int(cit['rerank_score']*100)}%)"):
+                with st.expander(f"[Source] {cit['citation_tag']} &bull; {cit['source']} &mdash; {cit['section']} (Confidence: {int(cit['rerank_score']*100)}%)"):
                     matching_chunk = next((c for c in all_chunks if c.chunk_id == cit["chunk_id"]), None)
                     if matching_chunk:
                         st.code(matching_chunk.text, language="markdown")
@@ -211,13 +209,13 @@ with tab_query:
 
 # Tab 2: Ragas Benchmark
 with tab_bench:
-    st.subheader("📊 Ragas Automated Evaluation Benchmark")
+    st.subheader("Ragas Automated Evaluation Benchmark")
     st.markdown(
         "Quantitative comparison between **Baseline Naive RAG** (Dense Vector Only) and our "
         "**Enterprise Agentic RAG** (Hybrid RRF + Cross-Encoder Reranker + Self-Correction) across 8 ground-truth test queries."
     )
 
-    if st.button("🔄 Run Full Benchmark Suite", type="secondary"):
+    if st.button("Run Full Benchmark Suite", type="secondary"):
         with st.spinner("Benchmarking both pipelines..."):
             comp = benchmark_suite.run_benchmark_comparison()
             st.session_state["benchmark_cache"] = comp
@@ -242,7 +240,7 @@ with tab_bench:
         st.metric("Avg Latency", f"{agentic['avg_latency_ms']} ms", delta=f"{agentic['avg_latency_ms'] - naive['avg_latency_ms']:+.1f} ms")
 
     st.markdown("---")
-    st.subheader("📈 Comparative Metric Breakdown")
+    st.subheader("Comparative Metric Breakdown")
     
     df_comp = pd.DataFrame({
         "Metric": ["Faithfulness (No Hallucination)", "Context Precision", "Answer Relevance"],
@@ -257,7 +255,7 @@ with tab_bench:
 
 # Tab 3: Knowledge Base
 with tab_kb:
-    st.subheader("📚 Enterprise Knowledge Corpus")
+    st.subheader("Enterprise Knowledge Corpus")
     st.dataframe(pd.DataFrame(docs_summary), use_container_width=True)
 
     st.markdown("#### Sample Raw Document Preview")

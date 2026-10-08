@@ -86,10 +86,10 @@ def main():
     args = parser.parse_args()
 
     if args.ui:
-        print("🚀 Starting Streamlit Web Dashboard at http://localhost:8501 ...")
+        print(" Starting Streamlit Web Dashboard at http://localhost:8501 ...")
         subprocess.run(["streamlit", "run", "ui/app.py"])
     elif args.api:
-        print("🚀 Starting FastAPI Server at http://localhost:8000 ...")
+        print(" Starting FastAPI Server at http://localhost:8000 ...")
         subprocess.run(["uvicorn", "src.api.server:app", "--reload", "--host", "0.0.0.0", "--port", "8000"])
     else:
         run_cli_demo()

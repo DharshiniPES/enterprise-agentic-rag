@@ -1,19 +1,19 @@
-# 🧠 Enterprise Agentic RAG Platform (CRAG & Self-RAG)
+# Enterprise Agentic RAG Platform (CRAG & Self-RAG)
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Architecture](https://img.shields.io/badge/Architecture-LangGraph%20%7C%20CRAG%20%7C%20Self--RAG-purple.svg)](#system-architecture)
-[![Retrieval](https://img.shields.io/badge/Retrieval-Dense%20%2B%20BM25%20(RRF)-green.svg)](#hybrid-retrieval--reranking)
-[![Evaluation](https://img.shields.io/badge/Evaluation-Ragas%20Benchmark-orange.svg)](#-quantitative-benchmark-results)
-[![Docker](https://img.shields.io/badge/Deployment-FastAPI%20%7C%20Docker-blue.svg)](#-deployment--api)
+[![Retrieval](https://img.shields.io/badge/Retrieval-Dense%20%2B%20BM25%20(RRF)-green.svg)](#key-technical-highlights)
+[![Evaluation](https://img.shields.io/badge/Evaluation-Ragas%20Benchmark-orange.svg)](#quantitative-benchmark-results)
+[![Deployment](https://img.shields.io/badge/Deployment-FastAPI%20%7C%20Docker-blue.svg)](#docker-deployment)
 [![Tests](https://img.shields.io/badge/Tests-6%2F6%20Passing-brightgreen.svg)](tests/)
 
-A production-grade, self-correcting **Enterprise Retrieval-Augmented Generation (RAG)** platform designed to query complex multi-modal corporate filings, SEC disclosures, and financial statements containing dense tabular data.
+A production-grade, self-correcting **Enterprise Retrieval-Augmented Generation (RAG)** platform designed to query complex corporate filings, SEC disclosures, and financial statements containing dense tabular data.
 
 Engineered with **Two-Stage Hybrid Search (Dense Vectors + BM25 Lexical)** fused via **Reciprocal Rank Fusion (RRF)**, precision **Cross-Encoder Reranking**, an adaptive **LangGraph Self-Correction State Machine**, and automated **Ragas Evaluation**.
 
 ---
 
-## 📌 System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
@@ -55,7 +55,7 @@ flowchart TD
 
 ---
 
-## 📊 Quantitative Benchmark Results
+## Quantitative Benchmark Results
 
 Evaluated against an 8-task ground-truth benchmark suite of complex corporate disclosures (comparing single-step baseline RAG vs our enterprise agentic pipeline):
 
@@ -69,7 +69,7 @@ Evaluated against an 8-task ground-truth benchmark suite of complex corporate di
 
 ---
 
-## ✨ Key Technical Highlights
+## Key Technical Highlights
 
 1. **Table-Aware Semantic Chunking:** Unlike naive character-splitter approaches that slice tables mid-row, the `SemanticTableChunker` isolates Markdown tables as atomic semantic units and prepends section hierarchy context to every chunk.
 2. **Two-Stage Multi-Index Retrieval:**
@@ -83,7 +83,7 @@ Evaluated against an 8-task ground-truth benchmark suite of complex corporate di
 
 ---
 
-## 🚀 Quickstart Guide
+## Quickstart Guide
 
 ### 1. Installation
 Clone the repository and install dependencies:
@@ -114,7 +114,7 @@ uvicorn src.api.server:app --reload --host 0.0.0.0 --port 8000
 
 ---
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 Run both the API and Web UI via Docker Compose:
 ```bash
@@ -125,46 +125,46 @@ docker compose up --build
 
 ---
 
-## 📂 Project Directory Structure
+## Project Directory Structure
 
 ```text
 enterprise-agentic-rag/
-├── data/
-│   ├── raw/                       # Enterprise filings (Apple Q3, Tesla Q2)
-│   └── benchmarks/                # Ground-truth Q&A evaluation dataset
-├── src/
-│   ├── config.py                  # Hyperparameters & environment configs
-│   ├── ingestion/
-│   │   ├── parser.py              # Document & table extractor
-│   │   └── chunker.py             # Semantic table-aware chunker
-│   ├── retrieval/
-│   │   ├── dense.py               # Vector embeddings & cosine search
-│   │   ├── sparse.py              # BM25 lexical retriever
-│   │   ├── reranker.py            # Cross-encoder precision reranker
-│   │   └── hybrid.py              # Reciprocal Rank Fusion engine
-│   ├── agent/
-│   │   ├── state.py               # TypedDict agent state schema
-│   │   ├── nodes.py               # Grader, Rewriter, Generator, Guard
-│   │   ├── llm_client.py          # Multi-provider client (Groq/OpenAI/Offline)
-│   │   └── graph.py               # Self-RAG state graph workflow
-│   ├── evaluation/
-│   │   └── ragas_bench.py         # Automated Ragas evaluation suite
-│   └── api/
-│       └── server.py              # Production FastAPI REST microservice
-├── ui/
-│   └── app.py                     # Streamlit live demo & analytics dashboard
-├── tests/
-│   └── test_pipeline.py           # Pytest unit & integration test suite
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── run_demo.py                    # Multi-mode demo runner
-└── README.md
+|-- data/
+|   |-- raw/                       # Enterprise filings (Apple Q3, Tesla Q2)
+|   \-- benchmarks/                # Ground-truth Q&A evaluation dataset
+|-- src/
+|   |-- config.py                  # Hyperparameters & environment configs
+|   |-- ingestion/
+|   |   |-- parser.py              # Document & table extractor
+|   |   \-- chunker.py             # Semantic table-aware chunker
+|   |-- retrieval/
+|   |   |-- dense.py               # Vector embeddings & cosine search
+|   |   |-- sparse.py              # BM25 lexical retriever
+|   |   |-- reranker.py            # Cross-encoder precision reranker
+|   |   \-- hybrid.py              # Reciprocal Rank Fusion engine
+|   |-- agent/
+|   |   |-- state.py               # TypedDict agent state schema
+|   |   |-- nodes.py               # Grader, Rewriter, Generator, Guard
+|   |   |-- llm_client.py          # Multi-provider client (Groq/OpenAI/Offline)
+|   |   \-- graph.py               # Self-RAG state graph workflow
+|   |-- evaluation/
+|   |   \-- ragas_bench.py         # Automated Ragas evaluation suite
+|   \-- api/
+|       \-- server.py              # Production FastAPI REST microservice
+|-- ui/
+|   \-- app.py                     # Streamlit live demo & analytics dashboard
+|-- tests/
+|   \-- test_pipeline.py           # Pytest unit & integration test suite
+|-- Dockerfile
+|-- docker-compose.yml
+|-- requirements.txt
+|-- run_demo.py                    # Multi-mode demo runner
+\-- README.md
 ```
 
 ---
 
-## 🧪 Running Automated Tests
+## Running Automated Tests
 
 Run the full pytest suite:
 ```bash
@@ -174,7 +174,7 @@ All 6 tests verify parsing, BM25 exact match, dense vector search, cross-encoder
 
 ---
 
-## 💼 Placement & Resume Points
+## Placement & Resume Points
 
 Use these high-impact impact statements on your resume:
 
@@ -186,5 +186,5 @@ Use these high-impact impact statements on your resume:
 
 ---
 
-## 📄 License
+## License
 MIT License &copy; 2026. Built for high-impact AI Engineering portfolios.
